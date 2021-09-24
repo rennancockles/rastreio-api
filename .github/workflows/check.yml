@@ -1,0 +1,22 @@
+name: Lint
+on: ["push", "pull_request"]
+
+jobs:
+  checks:
+    name: "Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: "scripts/install.sh -D"
+        shell: bash
+
+      - name: "Run linting checks"
+        run: "scripts/check.sh"
+        shell: bash
